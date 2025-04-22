@@ -1,0 +1,22 @@
+nombre = str(input("ingrese el nombre del producto: "))
+precio_unitario = float(input("ingrese el precio unitario: "))
+cantidad = int(input("ingrese la cantidad de productos: "))
+percent = int(input("ingrese el porcentaje de descuento: "))
+costo = precio_unitario * cantidad
+costo_descuento = (costo * percent )/ 100
+costo_final = costo - costo_descuento
+if cantidad <= 0:
+    print("la cantidad del producto debe ser entera positiva!")
+elif precio_unitario <=0:
+    print("el precio del producto debe ser valido!")
+elif percent < 0 or percent > 100 :
+    print("el porcentaje de descuento debe estar entre el rango de 0 a 100%")
+else:
+     print("_____________________________________________________________________________________________________________")
+     print("Nombre      | Cantidad | Precio untiario |Porcentaje de descuento     | Costo sin descuento | Costo con descuento |")
+     print("____________|__________|_________________|____________________________|_____________________|_____________________|")
+     print(nombre," \t    |",cantidad,"\t| ",precio_unitario,"$\t   |",percent,"\t\t\t|" ,costo,"$\t\t |",costo_final,"$\t|")
+     print("¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯")
+     print(f"{nombre},{cantidad},{precio_unitario},{percent},{costo},{costo_final}")
+
+#numero y precio deben ser positivos y descuento dentro del rango 0 a 100%tom
