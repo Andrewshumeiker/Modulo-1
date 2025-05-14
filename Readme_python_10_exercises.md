@@ -298,3 +298,225 @@ def movie_menu():
 if __name__ == "__main__":
     movie_menu()
 ```
+```python 
+# course_tracker.py
+
+courses = []
+
+def add_course():
+    title = input("Course title: ").strip()
+    try:
+        duration = int(input("Duration (hours): "))
+        enrolled = int(input("Number of students enrolled: "))
+        if duration < 0 or enrolled < 0:
+            raise ValueError
+    except ValueError:
+        print("Invalid input.")
+        return
+    courses.append({'title': title, 'duration': duration, 'enrolled': enrolled})
+    print(f"Course '{title}' added.")
+
+def update_enrollment():
+    title = input("Course to update: ").strip()
+    for course in courses:
+        if course['title'].lower() == title.lower():
+            try:
+                enrolled = int(input("New number of students: "))
+                if enrolled < 0:
+                    raise ValueError
+                course['enrolled'] = enrolled
+                print("Enrollment updated.")
+            except ValueError:
+                print("Invalid number.")
+            return
+    print("Course not found.")
+
+def filter_by_duration():
+    try:
+        min_duration = int(input("Minimum duration (hours): "))
+        for course in courses:
+            if course['duration'] >= min_duration:
+                print(f"{course['title']} - {course['duration']} hours")
+    except ValueError:
+        print("Invalid duration.")
+
+def course_menu():
+    while True:
+        print("\n--- Course Tracker ---")
+        print("1. Add Course")
+        print("2. Update Enrollment")
+        print("3. Filter by Duration")
+        print("4. Exit")
+        opt = input("Choose: ")
+        if opt == "1":
+            add_course()
+        elif opt == "2":
+            update_enrollment()
+        elif opt == "3":
+            filter_by_duration()
+        elif opt == "4":
+            break
+        else:
+            print("Invalid option.")
+
+if __name__ == "__main__":
+    course_menu()
+```
+```python
+# todo_list.py
+
+tasks = []
+
+def add_task():
+    desc = input("Task description: ").strip()
+    priority = input("Priority (low/medium/high): ").lower()
+    tasks.append({'desc': desc, 'priority': priority, 'done': False})
+    print("Task added.")
+
+def mark_done():
+    desc = input("Task to mark as done: ").strip()
+    for task in tasks:
+        if task['desc'].lower() == desc.lower():
+            task['done'] = True
+            print("Marked as completed.")
+            return
+    print("Task not found.")
+
+def filter_tasks():
+    print("1. Filter by priority")
+    print("2. Filter by status")
+    opt = input("Choose: ")
+    if opt == "1":
+        level = input("Priority level: ").lower()
+        for task in tasks:
+            if task['priority'] == level:
+                print(task)
+    elif opt == "2":
+        status = input("Status (done/pending): ").lower()
+        for task in tasks:
+            if (status == "done" and task['done']) or (status == "pending" and not task['done']):
+                print(task)
+
+def todo_menu():
+    while True:
+        print("\n--- To-Do List ---")
+        print("1. Add Task")
+        print("2. Mark as Done")
+        print("3. Filter Tasks")
+        print("4. Exit")
+        opt = input("Choose: ")
+        if opt == "1":
+            add_task()
+        elif opt == "2":
+            mark_done()
+        elif opt == "3":
+            filter_tasks()
+        elif opt == "4":
+            break
+
+if __name__ == "__main__":
+    todo_menu()
+```
+```python
+# digital_wallet.py
+
+expenses = []
+
+def add_expense():
+    category = input("Category: ").strip()
+    try:
+        amount = float(input("Amount: "))
+        if amount < 0:
+            raise ValueError
+        expenses.append({'category': category, 'amount': amount})
+        print("Expense recorded.")
+    except ValueError:
+        print("Invalid amount.")
+
+def total_expenses():
+    total = sum(e['amount'] for e in expenses)
+    print(f"Total spent: ${total:.2f}")
+
+def category_percentages():
+    total = sum(e['amount'] for e in expenses)
+    if total == 0:
+        print("No expenses.")
+        return
+    categories = {}
+    for e in expenses:
+        categories[e['category']] = categories.get(e['category'], 0) + e['amount']
+    for cat, amt in categories.items():
+        print(f"{cat}: {amt / total * 100:.2f}%")
+
+def wallet_menu():
+    while True:
+        print("\n--- Digital Wallet ---")
+        print("1. Add Expense")
+        print("2. Total Expenses")
+        print("3. Category Percentages")
+        print("4. Exit")
+        opt = input("Choose: ")
+        if opt == "1":
+            add_expense()
+        elif opt == "2":
+            total_expenses()
+        elif opt == "3":
+            category_percentages()
+        elif opt == "4":
+            break
+
+if __name__ == "__main__":
+    wallet_menu()
+```
+```python
+# pet_center.py
+
+pets = []
+
+def add_pet():
+    name = input("Name: ").strip()
+    species = input("Species: ").strip()
+    try:
+        age = int(input("Age: "))
+        if age < 0:
+            raise ValueError
+        pets.append({'name': name, 'species': species, 'age': age})
+        print("Pet added.")
+    except ValueError:
+        print("Invalid age.")
+
+def search_species():
+    specie = input("Species to search: ").strip()
+    for pet in pets:
+        if pet['species'].lower() == specie.lower():
+            print(pet)
+
+def filter_by_age():
+    try:
+        max_age = int(input("Max age: "))
+        for pet in pets:
+            if pet['age'] <= max_age:
+                print(pet)
+    except ValueError:
+        print("Invalid age.")
+
+def pet_menu():
+    while True:
+        print("\n--- Pet Adoption Center ---")
+        print("1. Add Pet")
+        print("2. Search by Species")
+        print("3. Filter by Age")
+        print("4. Exit")
+        opt = input("Choose: ")
+        if opt == "1":
+            add_pet()
+        elif opt == "2":
+            search_species()
+        elif opt == "3":
+            filter_by_age()
+        elif opt == "4":
+            break
+
+if __name__ == "__main__":
+    pet_menu()
+```
