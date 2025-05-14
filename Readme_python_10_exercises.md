@@ -224,3 +224,77 @@ if __name__ == "__main__":
     menu_libreria()
 ```
 ```python
+movies = []
+
+# Add a new movie to the list
+def add_movie():
+    title = input("Enter the movie title: ").strip()
+    if not title:
+        print("Title cannot be empty.")
+        return
+    for movie in movies:
+        if movie['title'].lower() == title.lower():
+            print("This movie already exists.")
+            return
+    movies.append({'title': title, 'ratings': []})
+    print(f"Movie '{title}' added successfully.")
+
+# Register a rating for a movie
+def rate_movie():
+    if not movies:
+        print("No movies available.")
+        return
+    title = input("Enter the movie title to rate: ").strip()
+    for movie in movies:
+        if movie['title'].lower() == title.lower():
+            try:
+                rating = int(input("Enter rating (1–5): "))
+                if 1 <= rating <= 5:
+                    movie['ratings'].append(rating)
+                    print("Rating added successfully.")
+                else:
+                    print("Rating must be between 1 and 5.")
+            except ValueError:
+                print("Please enter a valid number.")
+            return
+    print("Movie not found.")
+
+# Show average rating for each movie
+def show_ratings():
+    if not movies:
+        print("No movies registered yet.")
+        return
+    for movie in movies:
+        title = movie['title']
+        ratings = movie['ratings']
+        if ratings:
+            avg = sum(ratings) / len(ratings)
+            print(f"{title}: Average rating = {avg:.2f}")
+        else:
+            print(f"{title}: No ratings yet.")
+
+# User menu
+def movie_menu():
+    while True:
+        print("\n--- Movie Rating System ---")
+        print("1. Add movie")
+        print("2. Rate a movie")
+        print("3. Show average ratings")
+        print("4. Exit")
+        choice = input("Choose an option: ")
+        if choice == "1":
+            add_movie()
+        elif choice == "2":
+            rate_movie()
+        elif choice == "3":
+            show_ratings()
+        elif choice == "4":
+            print("Exiting...")
+            break
+        else:
+            print("Invalid option. Try again.")
+
+# Main entry point
+if __name__ == "__main__":
+    movie_menu()
+```
