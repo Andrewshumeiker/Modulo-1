@@ -520,3 +520,90 @@ def pet_menu():
 if __name__ == "__main__":
     pet_menu()
 ```
+```python
+# gym_membership.py
+
+members = []
+
+# Register new member
+def register_member(name, plan):
+    if not name.strip():
+        raise ValueError("Name cannot be empty.")
+    if plan.lower() not in ["monthly", "quarterly", "yearly"]:
+        raise ValueError("Invalid plan. Use: monthly, quarterly, or yearly.")
+    
+    members.append({
+        "name": name.strip(),
+        "plan": plan.lower(),
+        "is_up_to_date": True
+    })
+    print(f"Member '{name}' registered with plan '{plan}'.")
+
+# Change membership plan
+def change_plan(name, new_plan):
+    for member in members:
+        if member["name"].lower() == name.lower():
+            if new_plan.lower() not in ["monthly", "quarterly", "yearly"]:
+                raise ValueError("Invalid plan. Use: monthly, quarterly, or yearly.")
+            member["plan"] = new_plan.lower()
+            print(f"Plan for '{name}' updated to '{new_plan}'.")
+            return
+    raise ValueError("Member not found.")
+
+# Mark payment as overdue
+def mark_as_overdue(name):
+    for member in members:
+        if member["name"].lower() == name.lower():
+            member["is_up_to_date"] = False
+            print(f"Member '{name}' marked as overdue.")
+            return
+    raise ValueError("Member not found.")
+
+# List members with overdue payments
+def list_overdue_members():
+    overdue = [m for m in members if not m["is_up_to_date"]]
+    if overdue:
+        print("\n--- Members with overdue payments ---")
+        for m in overdue:
+            print(f"{m['name']} ({m['plan']})")
+    else:
+        print("All members are up-to-date.")
+
+# Main menu
+def gym_menu():
+    while True:
+        print("\n--- Gym Membership System ---")
+        print("1. Register new member")
+        print("2. Change membership plan")
+        print("3. Mark payment as overdue")
+        print("4. List members with overdue payments")
+        print("5. Exit")
+        
+        choice = input("Choose an option: ")
+        
+        try:
+            if choice == "1":
+                name = input("Member name: ")
+                plan = input("Plan (monthly/quarterly/yearly): ")
+                register_member(name, plan)
+            elif choice == "2":
+                name = input("Member name: ")
+                new_plan = input("New plan (monthly/quarterly/yearly): ")
+                change_plan(name, new_plan)
+            elif choice == "3":
+                name = input("Member name to mark as overdue: ")
+                mark_as_overdue(name)
+            elif choice == "4":
+                list_overdue_members()
+            elif choice == "5":
+                print("Exiting the system...")
+                break
+            else:
+                print("Invalid option.")
+        except ValueError as e:
+            print(f"Error: {e}")
+
+# Main entry point
+if __name__ == "__main__":
+    gym_menu()
+```
