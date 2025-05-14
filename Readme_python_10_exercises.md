@@ -559,6 +559,15 @@ def mark_as_overdue(name):
             return
     raise ValueError("Member not found.")
 
+# Mark payment as up to date (remove overdue status)
+def mark_as_up_to_date(name):
+    for member in members:
+        if member["name"].lower() == name.lower():
+            member["is_up_to_date"] = True
+            print(f"Member '{name}' is now up-to-date with payment.")
+            return
+    raise ValueError("Member not found.")
+
 # List members with overdue payments
 def list_overdue_members():
     overdue = [m for m in members if not m["is_up_to_date"]]
@@ -576,8 +585,9 @@ def gym_menu():
         print("1. Register new member")
         print("2. Change membership plan")
         print("3. Mark payment as overdue")
-        print("4. List members with overdue payments")
-        print("5. Exit")
+        print("4. Mark payment as up-to-date")
+        print("5. List members with overdue payments")
+        print("6. Exit")
         
         choice = input("Choose an option: ")
         
@@ -594,8 +604,11 @@ def gym_menu():
                 name = input("Member name to mark as overdue: ")
                 mark_as_overdue(name)
             elif choice == "4":
-                list_overdue_members()
+                name = input("Member name to mark as up-to-date: ")
+                mark_as_up_to_date(name)
             elif choice == "5":
+                list_overdue_members()
+            elif choice == "6":
                 print("Exiting the system...")
                 break
             else:
@@ -606,4 +619,5 @@ def gym_menu():
 # Main entry point
 if __name__ == "__main__":
     gym_menu()
+
 ```
