@@ -1,3 +1,4 @@
+```python
 estudiantes = {}
 
 def añadir_estudiante():
@@ -50,9 +51,9 @@ def menu_calificaciones():
 
 if __name__ == "__main__":
     menu_calificaciones()
+```
 
-
-
+```python
 menu = []
 
 def añadir_plato():
@@ -101,9 +102,9 @@ def menu_restaurante():
 
 if __name__ == "__main__":
     menu_restaurante()
+```
 
-
-
+```python
 almacen = {}
 
 def añadir_caja():
@@ -164,11 +165,11 @@ def menu_almacen():
 
 if __name__ == "__main__":
     menu_almacen()
+```
 
 
 
-
-
+```python
 biblioteca = []
 
 def añadir_libro():
@@ -221,4 +222,5 @@ def menu_libreria():
 
 if __name__ == "__main__":
     menu_libreria()
-    
+```
+```python
